@@ -1,0 +1,33 @@
+import { helmets } from "../resources";
+import { useQuery } from "../router";
+import { useApp } from "../state";
+import { HelmetImage, helmetPrice } from "../components/HelmetTile";
+import ShopButtons from "../components/ShopButtons";
+import AffiliateDisclosure from "../components/AffiliateDisclosure";
+import { helmetShopQuery } from "../affiliate";
+import { PageIntro, PageMeta, ShareButton, SourceNote } from "../components/PageUI";
+import { downloadText } from "../utils/storage";
+import Icon from "../components/icons";
+
+export default function HelmetComparePage() {
+  const { params, setQuery } = useQuery();
+  const { bookmarks, toggleBookmark } = useApp();
+  const ids = [...new Set((params.get("models") || "").split(","))].filter((id) => helmets.some((helmet) => helmet.id === id)).slice(0, 3);
+  const selected = ids.map((id) => helmets.find((helmet) => helmet.id === id)!);
+  const differences = params.get("differences") === "1";
+  const rows = [
+    { label: "Published starting price", values: selected.map(helmetPrice) },
+    { label: "Helmet format", values: selected.map((h) => h.type) },
+    { label: "Recorded size range", values: selected.map((h) => h.sizes || "Check exact-model chart") },
+    { label: "Unit certification", values: selected.map(() => "Inspect applicable PS/ICC and certification label") },
+    { label: "Fit", values: selected.map(() => "Try the exact model; size label alone is not enough") },
+  ];
+  const displayedRows = differences ? rows.filter((row) => new Set(row.values).size > 1) : rows;
+  const choose = (index: number, id: string) => { const next = [...ids]; next[index] = id; setQuery({ models: next.filter(Boolean).join(",") || undefined }); };
+  const exportCsv = () => { const rowsToWrite = [["Specification", ...selected.map((h) => `${h.brand} ${h.model}`)], ...rows.map((row) => [row.label, ...row.values])]; downloadText("motoindex-helmet-comparison.csv", rowsToWrite.map((row) => row.map((cell) => `"${cell.replace(/"/g, '""')}"`).join(",")).join("\n"), "text/csv;charset=utf-8"); };
+
+  return <div className="inner-page"><div className="page-container"><PageMeta title="Compare motorcycle helmets, formats and prices" description="Compare up to three helmets by recorded prices, formats and sizes, with fit and unit certification checks kept explicit." /><PageIntro eyebrow="Gear, side by side" title="Different helmets. One clearer decision." description="Compare the details you can verify. Then try the fit and inspect the exact helmet you will buy." breadcrumbs={[{ label: "Helmets", href: "/gear/helmets" }, { label: "Compare" }]} action={<ShareButton label="Share comparison" />} /><div className="compare-selectors">{[0, 1, 2].map((index) => <label className="compare-selector" key={index}><span className="field-label">Helmet {index + 1}{index === 2 ? " (optional)" : ""}</span><select className="field-input" value={ids[index] || ""} onChange={(event) => choose(index, event.target.value)}><option value="">Choose a helmet</option>{helmets.map((helmet) => <option key={helmet.id} value={helmet.id} disabled={ids.includes(helmet.id) && ids[index] !== helmet.id}>{helmet.brand} {helmet.model}</option>)}</select></label>)}</div>
+    {selected.length >= 2 ? <><div className="compare-toolbar"><label className="toggle-label"><input type="checkbox" checked={differences} onChange={(e) => setQuery({ differences: e.target.checked ? "1" : undefined })} /><span className="switch-track" />Show differences only</label><button type="button" className="action-secondary" onClick={exportCsv}><Icon name="doc" className="h-4 w-4" />Export comparison</button></div><div className="compare-table-scroll" role="region" tabIndex={0} aria-label="Helmet comparison table"><table className="compare-table"><caption className="sr-only">Recorded specifications of selected helmet models</caption><thead><tr><th scope="col"><p className="page-eyebrow">Fit first</p><p className="table-corner">Compare the model.<br />Check the unit.</p></th>{selected.map((helmet) => <th scope="col" key={helmet.id}><a href={`/gear/helmets/${helmet.slug}`}><HelmetImage helmet={helmet} /><span className="table-brand">{helmet.brand}</span><span className="table-model">{helmet.model}</span></a></th>)}</tr></thead><tbody>{displayedRows.map((row) => <tr key={row.label}><th scope="row">{row.label}</th>{row.values.map((value, i) => <td key={i}>{value}</td>)}</tr>)}</tbody><tfoot><tr><th scope="row">Save your research</th>{selected.map((helmet) => <td key={helmet.id}><button type="button" className="text-link" aria-pressed={bookmarks.includes(`/gear/helmets/${helmet.slug}`)} onClick={() => toggleBookmark(`/gear/helmets/${helmet.slug}`)}><Icon name={bookmarks.includes(`/gear/helmets/${helmet.slug}`) ? "heartFill" : "heart"} className="h-4 w-4" />{bookmarks.includes(`/gear/helmets/${helmet.slug}`) ? "Saved" : "Save helmet"}</button></td>)}</tr><tr><th scope="row">Shop this exact model</th>{selected.map((helmet) => <td key={helmet.id}><ShopButtons productKey={helmet.id} query={helmetShopQuery(helmet.brand, helmet.model)} label={`${helmet.brand} ${helmet.model}`} layout="inline" /></td>)}</tr></tfoot></table></div></> : <div className="empty-state"><Icon name="helmet" className="h-9 w-9 text-ink-400" /><h2>Choose two helmets to start.</h2><p>Compare prices, formats and recorded size ranges without treating a brand as a safety rating.</p><button type="button" className="action-primary" onClick={() => setQuery({ models: "kyt-tt-course,hjc-c10" })}>Start with KYT TT-Course vs HJC C10</button></div>}
+    <section className="related-section"><div className="tool-crosslinks"><a href="/guides/motorcycle-helmet-size-guide"><Icon name="ruler" className="h-5 w-5 text-racer-500" /><div><h2>Size is not the whole fit.</h2><p>Use the local measurement and fit checklist.</p></div><Icon name="arrowRight" className="h-4 w-4" /></a><a href="/guides/motorcycle-helmet-certification-philippines"><Icon name="shield" className="h-5 w-5 text-racer-500" /><div><h2>Check certification properly.</h2><p>Separate model claims and local conformity.</p></div><Icon name="arrowRight" className="h-4 w-4" /></a><a href="/gear/helmets/brands"><Icon name="helmet" className="h-5 w-5 text-racer-500" /><div><h2>Explore the brand guides.</h2><p>Find the context behind each name.</p></div><Icon name="arrowRight" className="h-4 w-4" /></a></div></section><AffiliateDisclosure compact /><SourceNote>Price, format and size references do not establish fit or certify the actual unit sold. Missing prices are not treated as free products; this tool is not a safety ranking.</SourceNote>
+  </div></div>;
+}

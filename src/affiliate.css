@@ -1,0 +1,353 @@
+/* Involve Asia / Shopee / Lazada shopping UI */
+
+.shop-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+  border: 1px solid transparent;
+}
+.shop-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+}
+.shop-btn-shopee {
+  background: #ee4d2d;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(238, 77, 45, 0.28);
+}
+.shop-btn-lazada {
+  background: linear-gradient(135deg, #1a0dab 0%, #4a2fd6 60%, #7b2ff7 100%);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(60, 30, 200, 0.25);
+}
+
+.shop-full {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 18px 0 6px;
+}
+.shop-full .shop-btn {
+  padding: 14px 16px;
+  justify-content: flex-start;
+}
+.shop-full .shop-btn > span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.shop-full .shop-btn strong {
+  font-size: 13px;
+  line-height: 1.3;
+}
+.shop-full .shop-btn small {
+  font-size: 10px;
+  font-weight: 500;
+  opacity: 0.85;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.shop-full .shop-btn > svg:last-child {
+  margin-left: auto;
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.shop-compact {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.shop-compact .shop-btn {
+  padding: 9px 14px;
+  font-size: 11px;
+  border-radius: 999px;
+}
+
+.shop-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.shop-inline a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #b3262f;
+  white-space: nowrap;
+}
+.shop-inline a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.shop-inline > span {
+  color: #aeb8c4;
+}
+
+.hero-shop {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px dashed #dbe2ea;
+}
+.hero-shop > p {
+  font-size: 11px;
+  font-weight: 700;
+  color: #637286;
+  margin-bottom: 10px;
+}
+
+.official-store-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #1a6f4a;
+  background: #eef8f1;
+  border: 1px solid #cde8d6;
+  padding: 9px 14px;
+  border-radius: 999px;
+}
+.official-store-link:hover {
+  background: #e2f2e9;
+}
+
+.shop-tips {
+  list-style: none;
+  padding: 0;
+  margin: 18px 0 6px;
+  display: grid;
+  gap: 9px;
+}
+.shop-tips li {
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #5b6a7e;
+}
+.shop-tips svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: #1a8a54;
+}
+
+.affiliate-note {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  background: #f6f8fb;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 13px 15px;
+  margin-top: 16px;
+  font-size: 11px;
+  line-height: 1.8;
+  color: #64758a;
+}
+.affiliate-note svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #8a97a8;
+}
+.affiliate-note a {
+  color: #b3262f;
+  font-weight: 700;
+}
+.affiliate-note-compact {
+  background: transparent;
+  border: none;
+  padding: 8px 0 0;
+  margin-top: 10px;
+  font-size: 10px;
+}
+
+.brand-shop-box {
+  background: #fff;
+  border: 1px solid #dfe5ed;
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin: 20px 0 26px;
+}
+.brand-shop-box .brand-shop-copy {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #637286;
+  margin: 6px 0 14px;
+  max-width: 640px;
+}
+
+.tile-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #edf1f5;
+}
+
+.accessory-picks {
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid #e2e8f0;
+  display: grid;
+  gap: 14px;
+}
+.accessory-pick {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  background: #fff;
+  border: 1px solid #dfe5ed;
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+.accessory-pick h3 {
+  font-size: 13px;
+  font-weight: 800;
+  color: #22304a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.accessory-pick p {
+  font-size: 12px;
+  line-height: 1.7;
+  color: #637286;
+  margin-top: 6px;
+}
+.accessory-pick small {
+  display: block;
+  font-size: 10px;
+  color: #8a97a8;
+  margin-top: 6px;
+}
+.pick-badge {
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: #fff4e5;
+  color: #b26a00;
+  border: 1px solid #f3ddb8;
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.official-stores-strip {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 18px 0 4px;
+}
+.official-stores-strip a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #1a6f4a;
+  background: #eef8f1;
+  border: 1px solid #cde8d6;
+  padding: 9px 14px;
+  border-radius: 999px;
+}
+.official-stores-strip a:hover {
+  background: #e2f2e9;
+}
+
+@media (max-width: 767px) {
+  .shop-full {
+    grid-template-columns: 1fr;
+  }
+  .accessory-pick {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .brand-shop-box {
+    padding: 16px;
+  }
+}
+
+.sticky-shop {
+  position: sticky;
+  bottom: 72px;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #15171a;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 14px;
+  margin: 28px 0 8px;
+  box-shadow: 0 12px 32px rgba(15, 18, 24, 0.28);
+}
+.sticky-shop > span {
+  font-size: 12px;
+  font-weight: 800;
+}
+.affiliate-banner {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #1b1e23;
+  color: #e8edf3;
+  padding: 14px 18px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.affiliate-banner a { color: #ffb4b0; font-weight: 700; }
+.affiliate-banner button {
+  flex-shrink: 0;
+  background: #db3036;
+  color: #fff;
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+@media (max-width: 767px) {
+  .sticky-shop { bottom: 84px; flex-wrap: wrap; }
+  .affiliate-banner { bottom: 78px; }
+}
+@media print {
+  .shop-full,
+  .shop-compact,
+  .shop-inline,
+  .hero-shop,
+  .brand-shop-box,
+  .accessory-picks,
+  .affiliate-note,
+  .sticky-shop,
+  .affiliate-banner {
+    display: none !important;
+  }
+}

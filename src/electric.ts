@@ -1,0 +1,7 @@
+export type ElectricMotorcycle = { id: string; name: string; subscriptionPrice: number; ownedPrices: [number, number]; ranges: [number, number]; topSpeed: number; dimensions: string; wheelbase: number; image: string; circular: string; colors: string[] };
+export const electricMotorcycles: ElectricMotorcycle[] = [
+  { id: "vinfast-evo", name: "VinFast Evo", subscriptionPrice: 62900, ownedPrices: [75600, 88300], ranges: [85, 150], topSpeed: 80, dimensions: "1,850 x 675 x 1,130 mm", wheelbase: 1295, image: "https://vinfastauto.ph/themes/custom/vinfast/images/pdp/evo/olive.webp", circular: "5281", colors: ["Olive", "Red", "Black", "White"] },
+  { id: "vinfast-feliz-ii", name: "VinFast Feliz II", subscriptionPrice: 64900, ownedPrices: [77600, 90300], ranges: [82, 145], topSpeed: 90, dimensions: "1,913 x 693 x 1,130 mm", wheelbase: 1320, image: "https://vinfastauto.ph/themes/custom/vinfast/images/pdp/feliz-ii/olive.webp", circular: "5279", colors: ["Olive", "Red", "Black", "White"] },
+  { id: "vinfast-viper", name: "VinFast Viper", subscriptionPrice: 73900, ownedPrices: [89600, 99300], ranges: [82, 145], topSpeed: 90, dimensions: "1,950 x 712 x 1,122 mm", wheelbase: 1320, image: "https://vinfastauto.ph/themes/custom/vinfast/images/pdp/viper/beige-black.webp", circular: "5277", colors: ["Beige Black", "Red Black", "Matte Black", "Grey", "White"] },
+];
+export const electricPath = (bike: ElectricMotorcycle) => `/motorcycles/electric/${bike.id}`;

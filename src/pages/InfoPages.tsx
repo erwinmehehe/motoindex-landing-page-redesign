@@ -1,0 +1,21 @@
+import { useState } from "react";
+import { PageIntro, PageMeta, SourceNote } from "../components/PageUI";
+import { useApp } from "../state";
+import Icon from "../components/icons";
+
+export function PrivacyPage() {
+  const { clearResearch } = useApp();
+  const [cleared, setCleared] = useState(false);
+  return <div className="inner-page"><div className="page-container"><PageMeta title="Privacy and browser-local data" description="Learn what this MotoIndex application stores in your browser, what it sends to external services and how to clear your local research data." /><PageIntro eyebrow="Your research, your choice" title="Keep your research personal." description="A plain explanation of browser-local storage, sharing and external resources in this application." /><div className="info-copy">
+    <h2>What is stored locally</h2><p>Your saved motorcycles, reading list, helmet and archive checklists, comparison choices, recently viewed models and shopping notes can be stored in this browser's localStorage. Dealer profile and correction forms also create local drafts if you choose to save them.</p><p>Local storage is not a user account or cloud synchronization. Your research is not automatically available in another browser or device. Use the download and share controls if you want a separate copy.</p>
+    <h2>What the forms do not do</h2><p>The local forms do not submit dealership applications, corrections, email alerts or payment information to a MotoIndex server. Their success messages explicitly describe a saved draft or download, not an email sent or application approved.</p><p>Do not store IDs, payment credentials, full vehicle identifiers or other sensitive information in shopping notes or drafts. A shared device can expose locally saved data to other people using the same browser.</p>
+    <h2>Sharing links and exports</h2><p>Catalog and comparison links include your chosen filters or model IDs. Calculator share links include the inputs you choose to share. Review the address before sending it, particularly if you entered personal financial assumptions.</p><p>Downloaded reports are ordinary files stored by your browser. Once downloaded or shared, they are outside the application's local-storage controls.</p>
+    <h2>External resources</h2><p>Google Fonts supplies the typography. Product photography is requested from MotoIndex source media and, for some models, manufacturer or editorial image hosts. Those requests disclose ordinary connection information such as your IP address to the resource provider.</p><p>Map links open the named map provider. Phone links hand a number to your device's calling application. Expandable source references identify external citations; these services have their own privacy practices.</p>
+    <h2>Clear your local research data</h2><p>The control below clears MotoIndex-prefixed browser storage and resets the in-memory garage state. It does not erase files you have downloaded, links you have shared or data held by a third party.</p><button type="button" className="action-secondary" onClick={() => setCleared(clearResearch())}>Clear locally stored MotoIndex data</button>{cleared && <p className="mt-4" role="status">Your MotoIndex browser storage and active garage state have been cleared.</p>}
+    <SourceNote>This page describes the behavior of this local application. It is not a legal certification. A production deployment must publish a policy reflecting its actual hosting, integrations, retention periods and contact process.</SourceNote>
+  </div></div></div>;
+}
+
+export function NotFoundPage() {
+  return <div className="inner-page"><div className="page-container"><PageMeta title="Page not found" description="This page is not available. Explore the MotoIndex page directory, brands or local model catalog." /><div className="not-found"><p className="page-eyebrow">404 / A little off-route</p><h1>Let's get you back<br />to a good road.</h1><p>That address is not a built route in this application. Find the page you need in the local directory.</p><div><a href="/sitemap" className="action-primary">Explore all pages<Icon name="arrowRight" className="h-4 w-4" /></a><a href="/brands" className="action-secondary">Browse brands</a></div></div></div></div>;
+}
